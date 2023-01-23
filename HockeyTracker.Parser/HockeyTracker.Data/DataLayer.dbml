@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db658" Class="DataLayerDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=9a402e1c-1598-42ec-a059-018c7aa6bf50.sqlserver.sequelizer.com;Initial Catalog=db658;Persist Security Info=True;User ID=db658" SettingsObjectName="HockeyTracker.Data.Properties.Settings" SettingsPropertyName="HockeyTrackerConnectionString_Prod" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Games" Member="Games">
+    <Type Name="Game">
+      <Column Name="GameNumber" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GameTime" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="HomeTeam" Type="System.String" DbType="NChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="VisitorTeam" Type="System.String" DbType="NChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="HomeGoals" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VisitorGoals" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Started" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Ended" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NotificationsHistory" Member="NotificationsHistories">
+    <Type Name="NotificationsHistory">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="StatusCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NotificationStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DeviceConnectionStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SubscriptionStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="User_NotificationsHistory" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Subscriptions" Member="Subscriptions">
+    <Type Name="Subscription">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Team" Type="System.String" DbType="NChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="SubscriptionType" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Subscription" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AnId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ChannelUri" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="LocalUtcOffset" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FirstUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Culture" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="User_NotificationsHistory" Member="NotificationsHistories" ThisKey="Id" OtherKey="UserId" Type="NotificationsHistory" />
+      <Association Name="User_Subscription" Member="Subscriptions" ThisKey="Id" OtherKey="UserId" Type="Subscription" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GetInstallationCount" Method="GetInstallationCount">
+    <Parameter Name="ForDate" Parameter="forDate" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="GetInstallationCountResult">
+      <Column Name="Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetUsersForNotification" Method="GetUsersForNotification">
+    <Parameter Name="Team" Parameter="team" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="SubscriptionType" Parameter="subscriptionType" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="GetUsersForNotificationResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AnId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ChannelUri" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="LocalUtcOffset" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FirstUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Culture" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

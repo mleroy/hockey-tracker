@@ -1,0 +1,106 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="HockeyTracker.TeamNotifications"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="Black"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background.jpg" />
+        </Grid.Background>
+
+        <toolkit:PerformanceProgressBar
+            IsIndeterminate="True" 
+            IsEnabled="{Binding IsDataLoading}" 
+            Visibility="{Binding ProgressBarVisibility}"
+            VerticalAlignment="Top"/>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="HOCKEY TRACKER" Style="{StaticResource ApplicationTitle}"/>
+            <StackPanel Orientation="Horizontal" Margin="9,-7,0,0">
+                <Image Source="{Binding Path=Team.ShortName, Converter={StaticResource TeamImageConverter}}" />
+                <TextBlock x:Name="PageTitle" Text="{Binding Team}" Style="{StaticResource PageTitle}" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+            <TextBlock FontSize="22" Text="{Binding Path=Str.NotificationsPageText, Source={StaticResource Loc}}" TextWrapping="Wrap"/>
+
+            <toolkit:ToggleSwitch 
+                Name="NotifyEndScoreLabel" 
+                Header="{Binding Path=Str.NotificationsFinalScores, Source={StaticResource Loc}}" 
+                IsChecked="{Binding UserSubscribedToEndScore}"
+                IsEnabled="{Binding IsDataLoaded}"
+                Style="{StaticResource NotificationToggleSwitch}">
+                <toolkit:ToggleSwitch.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentControl FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Black" Content="{Binding}"/>
+                    </DataTemplate>
+                </toolkit:ToggleSwitch.HeaderTemplate>
+            </toolkit:ToggleSwitch>
+            <TextBlock 
+                Text="{Binding Path=Str.NotificationsSample, Source={StaticResource Loc}}"
+                Margin="12, -20, 12, 0" />
+            <TextBlock 
+                Text="{Binding Team, Converter={StaticResource SampleFinalScoreNotificationConverter}}"
+                TextWrapping="Wrap"
+                Margin="12, 0, 12, 30" />
+            
+            <toolkit:ToggleSwitch 
+                Name="NotifyEveryGoalLabel" 
+                Header="{Binding Path=Str.NotificationsEveryGoal, Source={StaticResource Loc}}" 
+                IsChecked="{Binding UserSubscribedToEveryGoal}"
+                IsEnabled="{Binding IsDataLoaded}"
+                Style="{StaticResource NotificationToggleSwitch}">
+                <toolkit:ToggleSwitch.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentControl FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Black" Content="{Binding}"/>
+                    </DataTemplate>
+                </toolkit:ToggleSwitch.HeaderTemplate>
+            </toolkit:ToggleSwitch>
+            <TextBlock
+                Text="{Binding Path=Str.NotificationsSample, Source={StaticResource Loc}}"
+                TextWrapping="Wrap"
+                Margin="12, -20, 12, 0" />
+            <TextBlock 
+                Text="{Binding Path=Str.NotificationsSampleGoal, Source={StaticResource Loc}}"
+                TextWrapping="Wrap"
+                Margin="12, 0, 12, 30" />
+
+            <toolkit:ToggleSwitch 
+                Name="TeamLiveTileLabel" 
+                Header="{Binding Path=Str.NotificationsLiveTile, Source={StaticResource Loc}}" 
+                IsChecked="{Binding TeamLiveTileEnabled}"
+                IsEnabled="{Binding IsDataLoaded}"
+                Style="{StaticResource NotificationToggleSwitch}">
+                <toolkit:ToggleSwitch.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentControl FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Black" Content="{Binding}"/>
+                    </DataTemplate>
+                </toolkit:ToggleSwitch.HeaderTemplate>
+            </toolkit:ToggleSwitch>
+            <TextBlock
+                Text="{Binding Path=Str.NotificationsLiveTileExplanation, Source={StaticResource Loc}}"
+                TextWrapping="Wrap"
+                Margin="12, -20, 12, 0" />
+            
+        </StackPanel>
+    </Grid>
+
+</phone:PhoneApplicationPage>

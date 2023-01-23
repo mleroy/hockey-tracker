@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
+  <App xmlns="" ProductID="{32bc7199-4e8a-4146-aa1f-a66e1bfd5c67}" Title="Hockey Tracker" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Marvyn Leroy" Description="Hockey Tracker notifies you of specific events in NHL hockey games" Publisher="Marvyn Leroy">
+    <IconPath IsRelative="true" IsResource="false">HT_Phone_62x62.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_IDENTITY_USER" />
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="HockeyTrackerToken" TaskName="_default">
+        <TemplateType5>
+          <BackgroundImageURI IsRelative="true" IsResource="false">HT_Phone_173x173.png</BackgroundImageURI>
+          <Count>0</Count>
+          <Title>Hockey Tracker</Title>
+        </TemplateType5>
+      </PrimaryToken>
+    </Tokens>
+  </App>
+</Deployment>

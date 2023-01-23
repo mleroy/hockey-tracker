@@ -1,0 +1,165 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="HockeyTracker.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:HockeyTracker"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False"
+    local:TiltEffect.IsTiltEnabled="True">
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Background.jpg" />
+        </Grid.Background>
+
+        <toolkit:PerformanceProgressBar
+            IsIndeterminate="True" 
+            IsEnabled="{Binding IsDataLoading}" 
+            Visibility="{Binding ProgressBarVisibility}"
+            VerticalAlignment="Top"/>
+
+        <controls:Pivot Title="HOCKEY TRACKER" Foreground="Black">
+            <!--
+            Servira a montrer les games en cours, un jour.
+            <controls:PivotItem Header="games">
+                <ListBox x:Name="Games"
+                         ItemsSource="{Binding Games}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,17">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=VisitorTeam.Name}" Style="{StaticResource NormalText}" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="@" Style="{StaticResource NormalText}"/>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Path=HomeTeam.Name}" Style="{StaticResource NormalText}" HorizontalAlignment="Right" />
+
+                                <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{Binding Path=VisitorTeam.ShortName, Converter={StaticResource TeamImageConverter}}" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,-12,20,0" Text="{Binding VisitorScore}" Style="{StaticResource GameScore}" HorizontalAlignment="Right"/>
+                                
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding State}" Style="{StaticResource NormalText}"/>
+
+                                <TextBlock Grid.Column="3"  Grid.Row="1" Margin="20,-12,0,0" Text="{Binding HomeScore}" Style="{StaticResource GameScore}" HorizontalAlignment="Left"/>
+                                <Image Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Source="{Binding Path=HomeTeam.ShortName, Converter={StaticResource TeamImageConverter}}" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PivotItem>-->
+            <controls:PivotItem Header="{Binding Path=Str.EasternPivotTitle, Source={StaticResource Loc}}">
+                <ListBox x:Name="EasternTeamsList"
+                         ItemsSource="{Binding EasternTeams}"
+                         SelectionChanged="TeamsList_SelectionChanged">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,17">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Foreground="Black" Text="{Binding Division, Converter={StaticResource TeamDivisionTextTranslator}}" Visibility="{Binding ShortName, Converter={StaticResource TeamDivisionVisibilityConverter}}"/>
+
+                                <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Source="{Binding ShortName, Converter={StaticResource TeamImageConverter}}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Locale}" Style="{StaticResource TeamLocale}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource TeamName}" />
+
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding CurrentGame, Converter={StaticResource GameStatusConverter}, ConverterParameter=Line1}" Style="{StaticResource TeamGameSummary}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding CurrentGame, Converter={StaticResource GameStatusConverter}, ConverterParameter=Line2}" Style="{StaticResource TeamGameSummary}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="{Binding Path=Str.WesternPivotTitle, Source={StaticResource Loc}}">
+                <ListBox x:Name="WesternTeamsList"
+                         ItemsSource="{Binding WesternTeams}"
+                         SelectionChanged="TeamsList_SelectionChanged">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,17">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Foreground="Black" Text="{Binding Division, Converter={StaticResource TeamDivisionTextTranslator}}" Visibility="{Binding ShortName, Converter={StaticResource TeamDivisionVisibilityConverter}}"/>
+
+                                <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Source="{Binding ShortName, Converter={StaticResource TeamImageConverter}}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Locale}" Style="{StaticResource TeamLocale}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource TeamName}" />
+
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding CurrentGame, Converter={StaticResource GameStatusConverter}, ConverterParameter=Line1}" Style="{StaticResource TeamGameSummary}" />
+                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding CurrentGame, Converter={StaticResource GameStatusConverter}, ConverterParameter=Line2}" Style="{StaticResource TeamGameSummary}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PivotItem>
+
+            <controls:PivotItem Header="{Binding Path=Str.AboutPivotTitle, Source={StaticResource Loc}}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource NormalText}" Text="{Binding Path=Str.AboutText1, Source={StaticResource Loc}}"/>
+                    <TextBlock Style="{StaticResource NormalText}" Margin="12,40,12,0" Text="{Binding Path=Str.AboutText2, Source={StaticResource Loc}}"/>
+                    <Button Content="{Binding Path=Str.AboutSendFeedback, Source={StaticResource Loc}}" Click="SendFeedback_Click" Style="{StaticResource SendFeedbackButton}" Margin="0,15,0,0"/>
+                    <Button Content="{Binding Path=Str.AboutRateThisApp, Source={StaticResource Loc}}" Click="RateApp_Click" Style="{StaticResource SendFeedbackButton}" Margin="0,15,0,0"/>
+                    <TextBlock Foreground="Gray" Margin="12, 15, 12, 0" Style="{StaticResource NormalText}">
+                        Version 1.8
+                    </TextBlock>
+                </StackPanel>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>

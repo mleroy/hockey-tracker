@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataLayer">
+  <DataContextMoniker Name="/DataLayerDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c5692b28-efe5-450a-86b7-74e4ab131a9c" absoluteBounds="6.75, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/DataLayerDataContext/Game" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10814f70-440c-4488-b91c-3138968d69e7" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b0f1ae3e-f06a-425b-bb35-5163fbce0a82" absoluteBounds="3.5, 3.375, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/DataLayerDataContext/NotificationsHistory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1794cbba-c30c-456c-a0cb-dd4d98d3f57f" absoluteBounds="3.515, 3.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e01a6ff1-0b78-4b54-9caf-aa9c645cd075" absoluteBounds="3.5, 1.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataLayerDataContext/Subscription" />
+      <nestedChildShapes>
+        <elementListCompartment Id="01d41110-8f86-42bb-ab35-a48ec4454ba7" absoluteBounds="3.515, 1.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="24d21f0e-b2a3-4bbb-b517-f638ccd0f74f" absoluteBounds="0.5, 2, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/DataLayerDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b7e70180-e7b1-4495-837d-d86550bc5f30" absoluteBounds="0.51500000000000012, 2.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 3.86140055338542); (3.5 : 3.86140055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataLayerDataContext/User/User_NotificationsHistory" />
+      <nodes>
+        <classShapeMoniker Id="24d21f0e-b2a3-4bbb-b517-f638ccd0f74f" />
+        <classShapeMoniker Id="b0f1ae3e-f06a-425b-bb35-5163fbce0a82" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 2.35179768880208); (3.5 : 2.35179768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataLayerDataContext/User/User_Subscription" />
+      <nodes>
+        <classShapeMoniker Id="24d21f0e-b2a3-4bbb-b517-f638ccd0f74f" />
+        <classShapeMoniker Id="e01a6ff1-0b78-4b54-9caf-aa9c645cd075" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89724A8C-905F-4A0F-AD65-5AA80E8C91BA}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HockeyTracker</RootNamespace>
+    <AssemblyName>HockeyTracker</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>HockeyTracker.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>HockeyTracker.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="system.data.linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="AppResources.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Converters.cs" />
+    <Compile Include="Classes\Game.cs" />
+    <Compile Include="Classes\HTDataContext.cs" />
+    <Compile Include="Classes\LocalizedStrings.cs" />
+    <Compile Include="Classes\Notifications.cs" />
+    <Compile Include="Classes\Subscription.cs" />
+    <Compile Include="Classes\Team.cs" />
+    <Compile Include="Classes\TiltEffect.cs" />
+    <Compile Include="Classes\Tools.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\HockeyTrackerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TeamNotifications.xaml.cs">
+      <DependentUpon>TeamNotifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AppData.cs" />
+    <Compile Include="ViewModels\TeamViewModel.cs" />
+    <Compile Include="ViewModels\TeamsViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <DesignData Include="SampleData\MainViewModelSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <Page Include="TeamNotifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HT_Phone_173x173.png" />
+    <Content Include="HT_Phone_62x62.png" />
+    <Content Include="Images\ANA_173.png" />
+    <Content Include="Images\ANA_173_back.png" />
+    <Resource Include="Images\ari.png" />
+    <Resource Include="Images\ARI_173.png" />
+    <Resource Include="Images\ARI_173_back.png" />
+    <Content Include="Images\BOS_173.png" />
+    <Content Include="Images\BOS_173_back.png" />
+    <Content Include="Images\BUF_173.png" />
+    <Content Include="Images\BUF_173_back.png" />
+    <Content Include="Images\CAR_173.png" />
+    <Content Include="Images\CAR_173_back.png" />
+    <Content Include="Images\CBJ_173.png" />
+    <Content Include="Images\CBJ_173_back.png" />
+    <Content Include="Images\CGY_173.png" />
+    <Content Include="Images\CGY_173_back.png" />
+    <Content Include="Images\CHI_173.png" />
+    <Content Include="Images\CHI_173_back.png" />
+    <Content Include="Images\COL_173.png" />
+    <Content Include="Images\COL_173_back.png" />
+    <Content Include="Images\DAL_173.png" />
+    <Content Include="Images\DAL_173_back.png" />
+    <Content Include="Images\DET_173.png" />
+    <Content Include="Images\DET_173_back.png" />
+    <Content Include="Images\EDM_173.png" />
+    <Content Include="Images\EDM_173_back.png" />
+    <Content Include="Images\FLA_173.png" />
+    <Content Include="Images\FLA_173_back.png" />
+    <Content Include="Images\LAK_173.png" />
+    <Content Include="Images\LAK_173_back.png" />
+    <None Include="packages.config" />
+    <None Include="Service References\HockeyTrackerService\HockeyTracker.HockeyTrackerService.Game.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HockeyTrackerService\HockeyTracker.HockeyTrackerService.Subscription.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HockeyTrackerService\configuration91.svcinfo" />
+    <None Include="Service References\HockeyTrackerService\configuration.svcinfo" />
+    <None Include="Service References\HockeyTrackerService\HockeyTrackerService2.wsdl" />
+    <None Include="Service References\HockeyTrackerService\HockeyTrackerService21.wsdl" />
+    <None Include="Service References\HockeyTrackerService\HockeyTrackerService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\HockeyTrackerService\HockeyTrackerService41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\HockeyTrackerService\HockeyTrackerService42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\HockeyTrackerService\HockeyTrackerService43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\HockeyTrackerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\HockeyTrackerService\HockeyTrackerService1.disco" />
+    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Images\MIN_173.png" />
+    <Content Include="Images\MIN_173_back.png" />
+    <Content Include="Images\MTL_173.png" />
+    <Content Include="Images\MTL_173_back.png" />
+    <Content Include="Images\NJD_173.png" />
+    <Content Include="Images\NJD_173_back.png" />
+    <Content Include="Images\NSH_173.png" />
+    <Content Include="Images\NSH_173_back.png" />
+    <Content Include="Images\NYI_173.png" />
+    <Content Include="Images\NYI_173_back.png" />
+    <Content Include="Images\NYR_173.png" />
+    <Content Include="Images\NYR_173_back.png" />
+    <Content Include="Images\OTT_173.png" />
+    <Content Include="Images\OTT_173_back.png" />
+    <Content Include="Images\PHI_173.png" />
+    <Content Include="Images\PHI_173_back.png" />
+    <Content Include="Images\PIT_173.png" />
+    <Content Include="Images\PIT_173_back.png" />
+    <Content Include="Images\SJS_173.png" />
+    <Content Include="Images\SJS_173_back.png" />
+    <Content Include="Images\STL_173.png" />
+    <Content Include="Images\STL_173_back.png" />
+    <Content Include="Images\TBL_173.png" />
+    <Content Include="Images\TBL_173_back.png" />
+    <Content Include="Images\TOR_173.png" />
+    <Content Include="Images\TOR_173_back.png" />
+    <Content Include="Images\VAN_173.png" />
+    <Content Include="Images\VAN_173_back.png" />
+    <Resource Include="Images\wpg.png" />
+    <Content Include="Images\WPG_173.png" />
+    <Content Include="Images\WPG_173_back.png" />
+    <Content Include="Images\WSH_173.png" />
+    <Content Include="Images\WSH_173_back.png" />
+    <Content Include="ServiceReferences.ClientConfig">
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Images\Background.jpg" />
+    <Resource Include="Images\wsh.png" />
+    <Resource Include="Images\van.png" />
+    <Resource Include="Images\tor.png" />
+    <Resource Include="Images\tbl.png" />
+    <Resource Include="Images\stl.png" />
+    <Resource Include="Images\sjs.png" />
+    <Resource Include="Images\pit.png" />
+    <Resource Include="Images\phi.png" />
+    <Resource Include="Images\ott.png" />
+    <Resource Include="Images\nyr.png" />
+    <Resource Include="Images\nyi.png" />
+    <Resource Include="Images\nsh.png" />
+    <Resource Include="Images\njd.png" />
+    <Resource Include="Images\mtl.png" />
+    <Resource Include="Images\min.png" />
+    <Resource Include="Images\lak.png" />
+    <Resource Include="Images\fla.png" />
+    <Resource Include="Images\edm.png" />
+    <Resource Include="Images\det.png" />
+    <Resource Include="Images\dal.png" />
+    <Resource Include="Images\col.png" />
+    <Resource Include="Images\chi.png" />
+    <Resource Include="Images\cgy.png" />
+    <Resource Include="Images\cbj.png" />
+    <Resource Include="Images\car.png" />
+    <Resource Include="Images\buf.png" />
+    <Resource Include="Images\bos.png" />
+    <Resource Include="Images\ana.png" />
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\HockeyTrackerService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AppResources.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>
